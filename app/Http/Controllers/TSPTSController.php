@@ -113,7 +113,7 @@ class TSPTSController extends Controller
             // $lot_no = (int)$lot_no;
             $lot_no = (int)$lot_no[count($lot_no)-1];
             $oqcvirs[$i]->nnnnnnnn = $lot_no;
-            $oqcvirs[$i]->oqc_inspec = OQCInspection::where('po_no', $oqcvirs[$i]->po_no)->where('lot_no', $lot_no)->limit(1)->get();
+            $oqcvirs[$i]->oqc_inspec = OQCInspection::where('po_no', $oqcvirs[$i]->po_no)->where('lot_no', $lot_no)->orderBy('app_date', 'desc')->limit(1)->get();
             $oqcvirs[$i]->oqc_inspec_2 = OQCInspection_2::where('prod_runcard_id', $oqcvirs[$i]->id)->get();
             if( count($oqcvirs[$i]->tspts_oqcvir_info)>0 )
                 $oqcvirs[$i]->tspts_oqcvir_info[0]->inspector_info_2 = User::where('employee_id', $oqcvirs[$i]->tspts_oqcvir_info[0]->employee_id)->get();
